@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <img class="card-img-top" src=${currentMovie.Poster} alt="Card image cap">
             <div class="card-body">
             <p class="card-text">${currentMovie.Title} ${currentMovie.Year}</p>
+            <button class="btn btn-primary input-group-btn" type="submit" onclick="saveToWatchlist(${currentMovie.imdbID})">Add</button>
             </div>
             </div>`
         })
@@ -14,8 +15,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let content = document.getElementsByClassName("movie")[0];
     // document.getElementById("searchButton").addEventListener("submit", renderMovies(movieData))
     // content.innerHTML = (renderMovies(movieData))   
-    $('#searchButton').click(function() {
+    $('#searchButton').click(function(e) {
+        e.preventDefault()
         content.innerHTML = renderMovies(movieData)
+        console.log(renderMovies(movieData))
     })
 })
+
+function saveToWatchlist(imdb) {
+    let movie = movieData.find(function(currentMovie){
+        return currentMovie.imdbID == imdb
+    })
+    console.log(movie)
+}
 
